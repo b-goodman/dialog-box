@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>dialog-box</title>
+	<script type="module" src="./dist/index.js"></script>
+</head>
+
+<body>
+	<dialog-box open="true" confirm-lbl="Continue">
+		<div slot="dialog-title">
+			Title Heading
+		</div>
+		<div slot="dialog-content">
+			Hello, test test test
+			blah
+		</div>
+	</dialog-box>
+</body>
+
+<script>
+	const dialogBox = document.querySelector("dialog-box");
+	dialogBox.addEventListener("confirmed", (e) => console.log(e))
+	dialogBox.addEventListener("cancelled", (e) => console.log(e))
+</script>
+
+
+</html>
