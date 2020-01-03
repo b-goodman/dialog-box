@@ -37,12 +37,8 @@ export default class DialogBox extends HTMLElement {
             <div id="box">
 
                 <div id="dialog-content-wrapper">
-                    ${this.querySelector("[slot='dialog-title']") === null
-                        ? `<div id="dialog-title">${opts?.title}</div>` || ``
-                        : `<slot name="dialog-title"></slot>`}
-                    ${this.querySelector("[slot='dialog-content']") === null
-                        ? `<div id="dialog-content">${opts?.content}</div>` || ``
-                        : `<slot name="dialog-content"></slot>`}
+                    <slot name="dialog-title"></slot>
+                    <slot name="dialog-content"></slot>
                 </div>
 
                 ${this.querySelector("[slot='dialog-control']") === null
@@ -59,8 +55,25 @@ export default class DialogBox extends HTMLElement {
         const shadowRoot = this.attachShadow({mode: 'open'});
         shadowRoot.appendChild(template.content.cloneNode(true));
 
+        if (this.querySelector("[slot='dialog-title']") === null) {
+            const title = document.createElement("div");
+            title.slot = "dialog-title";
+            title.innerText = opts?.title || "";
+            this.appendChild(title);
+        };
+
+        if (this.querySelector("[slot='dialog-content']") === null) {
+            const content = document.createElement("div");
+            content.slot = "dialog-content";
+            content.innerText = opts?.content || "";
+            this.appendChild(content);
+        }
+
         this._cancelBtnRef = shadowRoot.querySelector<HTMLDivElement>("#cancel_btn") || undefined;
         this._confirmBtnRef = shadowRoot.querySelector<HTMLDivElement>("#confirm_btn") || undefined;
+
+        this._titleRef = this.querySelector<HTMLDivElement>("[slot='dialog-title']")!;
+        this._contentRef = this.querySelector<HTMLDivElement>("[slot='dialog-content']")!;
     }
 
     // attributeChangedCallback(name: string, _oldVal: string, newVal: string) {}
@@ -124,11 +137,30 @@ export default class DialogBox extends HTMLElement {
         return this.getAttribute("cancel-lbl") || "Cancel";
     }
 
+    get dialogTitle(){
+        return this._titleRef.innerHTML;
+    }
+
+    set dialogTitle(newTitle: string){
+        this._titleRef.innerText = newTitle;
+    }
+
+    get dialogContent(){
+        return this._contentRef.innerHTML;
+    }
+
+    set dialogContent(newContent: string){
+        this._contentRef.innerHTML = newContent;
+    }
+
 
     private _cancelBtnRef?: HTMLDivElement;
     private _confirmBtnRef?: HTMLDivElement;
     private _confirmBtnClickEvent: Event = new Event("confirmed");
     private _cancelBtnClickEvent: Event = new Event("cancelled");
+
+    private _titleRef: HTMLDivElement;
+    private _contentRef: HTMLDivElement;
 
     private _handleCancelBtnClick = (_event: MouseEvent) => {
         this.dispatchEvent(this._cancelBtnClickEvent);

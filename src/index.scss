@@ -17,8 +17,9 @@ $t-duration: 0.4s;
 
 .btn, ::slotted(.btn) {
     font-size: $content-font-size;
-    width: 70px;
+    min-width: 70px;
     height: $button-height;
+    padding: 0 3px 0 3px;
     border: 1px solid black;
     border-radius: 3px;
     text-align: center;

@@ -2,10 +2,10 @@
 <html>
 <head>
 	<title>dialog-box</title>
-	<script type="module" src="./dist/index.js"></script>
+	<!-- <script type="module" src="./dist/index.js"></script> -->
 </head>
 
-<body>
+<!-- <body>
 	<dialog-box open="true" confirm-lbl="Continue">
 		<div slot="dialog-title">
 			Title Heading
@@ -15,26 +15,26 @@
 			blah
 		</div>
 	</dialog-box>
-</body>
+</body> -->
 
 <body>
 
 </body>
 
-<script>
+<!-- <script>
 	const dialogBox = document.querySelector("dialog-box");
 	dialogBox.addEventListener("confirmed", (e) => console.log(e))
 	dialogBox.addEventListener("cancelled", (e) => console.log(e))
-</script>
+</script> -->
 
-<!-- <script type="module">
+<script type="module">
 	import DialogBox from "./dist/index.js";
-	const dialogBox = new DialogBox({title: "Test Title", content: "Test content"});
+	const dialogBox = new DialogBox({title: "Test Title", content: "Test content", confirmBtn:{lbl: "New Game"}});
 	document.querySelector("body").appendChild(dialogBox);
 	dialogBox.open = true;
 	dialogBox.addEventListener("confirmed", (e) => console.log(e))
 	dialogBox.addEventListener("cancelled", (e) => console.log(e))
-</script> -->
+</script>
 
 
 </html>

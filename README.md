@@ -89,6 +89,20 @@ If true, the default cancellation button will be rendered.  Default `true`.
 
 Override the default cancellation button label.  Default `"Cancel"`.
 
+---
+
+## Properties
+
+### `dialogTitle`
+
+Gets the current title or can be set to a new value;
+
+### `dialogContent`
+
+Gets the current content or can be set to a new value;
+
+---
+
 ## Events
 
 ### `"confirmed"`
