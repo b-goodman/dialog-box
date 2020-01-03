@@ -17,11 +17,24 @@
 	</dialog-box>
 </body>
 
+<body>
+
+</body>
+
 <script>
 	const dialogBox = document.querySelector("dialog-box");
 	dialogBox.addEventListener("confirmed", (e) => console.log(e))
 	dialogBox.addEventListener("cancelled", (e) => console.log(e))
 </script>
+
+<!-- <script type="module">
+	import DialogBox from "./dist/index.js";
+	const dialogBox = new DialogBox({title: "Test Title", content: "Test content"});
+	document.querySelector("body").appendChild(dialogBox);
+	dialogBox.open = true;
+	dialogBox.addEventListener("confirmed", (e) => console.log(e))
+	dialogBox.addEventListener("cancelled", (e) => console.log(e))
+</script> -->
 
 
 </html>

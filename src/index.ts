@@ -7,7 +7,21 @@ export default class DialogBox extends HTMLElement {
         return ["open"];
     }
 
-    constructor(opts?:{confirmBtn?:{include?: boolean, lbl?:string}, cancelBtn?:{include?: boolean, lbl?:string}, closeOnConfirm?:boolean }) {
+    constructor(
+        opts?:{
+            title?: string,
+            content?: string,
+            confirmBtn?:{
+                include?: boolean,
+                lbl?:string
+            },
+            cancelBtn?:{
+                include?: boolean,
+                lbl?:string
+            },
+            closeOnConfirm?:boolean
+        }
+        ) {
         super();
 
         if (opts?.confirmBtn?.include) this.confirmBtn = opts?.confirmBtn?.include;
@@ -23,8 +37,12 @@ export default class DialogBox extends HTMLElement {
             <div id="box">
 
                 <div id="dialog-content-wrapper">
-                    <slot name="dialog-title"></slot>
-                    <slot name="dialog-content"></slot>
+                    ${this.querySelector("[slot='dialog-title']") === null
+                        ? `<div id="dialog-title">${opts?.title}</div>` || ``
+                        : `<slot name="dialog-title"></slot>`}
+                    ${this.querySelector("[slot='dialog-content']") === null
+                        ? `<div id="dialog-content">${opts?.content}</div>` || ``
+                        : `<slot name="dialog-content"></slot>`}
                 </div>
 
                 ${this.querySelector("[slot='dialog-control']") === null
@@ -59,7 +77,7 @@ export default class DialogBox extends HTMLElement {
     // disconnecetdCallback() {}
 
     set open(newState: boolean){
-        newState ? this.setAttribute("open", JSON.stringify(newState)) : this.removeAttribute("open");
+        this.setAttribute("open", JSON.stringify(newState));
     }
 
     get open(){

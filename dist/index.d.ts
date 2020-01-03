@@ -1,6 +1,8 @@
 declare class DialogBox extends HTMLElement {
     static get observedAttributes(): string[];
     constructor(opts?: {
+        title?: string;
+        content?: string;
         confirmBtn?: {
             include?: boolean;
             lbl?: string;

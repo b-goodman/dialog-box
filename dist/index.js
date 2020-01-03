@@ -1,8 +1,8 @@
-var css = ".row{display:flex;justify-content:center}.row div:not(:last-of-type){margin:0 5px 0 0}.btn,::slotted(.btn){font-size:16px;width:70px;height:30px;border:1px solid #000;border-radius:3px;text-align:center;line-height:30px;cursor:pointer}.btn:active,::slotted(.btn:active){box-shadow:inset 1px 1px grey}.primary,::slotted(.primary){background:#d4e8ea}.secondary,::slotted(.secondary){background:#ead4d4}slot[name=dialog-title]{font-weight:600;font-size:18px}slot[name=dialog-content]::slotted(div){padding:10px}:host([open]) #box{display:unset}:host([open]) #mask{display:unset;opacity:.5}:host{font-family:sans-serif}:host #box{padding:5px;height:auto;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid #000;background:#fff;width:300px;max-height:300px;min-height:100px;z-index:999}:host #box,:host #mask{display:none;position:absolute}:host #mask{top:0;left:0;background-color:rgba(0,0,0,.5);opacity:0;width:100vw;height:100vh;z-index:998;transition:opacity .4s ease-out}";
+var css = ".row{display:flex;justify-content:center}.row div:not(:last-of-type){margin:0 5px 0 0}.btn,::slotted(.btn){font-size:16px;width:70px;height:30px;border:1px solid #000;border-radius:3px;text-align:center;line-height:30px;cursor:pointer}.btn:active,::slotted(.btn:active){box-shadow:inset 1px 1px grey}.primary,::slotted(.primary){background:#d4e8ea}.secondary,::slotted(.secondary){background:#ead4d4}div#dialog-title,slot[name=dialog-title]{font-weight:600;font-size:18px}div#dialog-content,slot[name=dialog-content]::slotted(div){padding:10px}:host([open=true]) #box{display:unset}:host([open=true]) #mask{display:unset;opacity:.5}:host{font-family:sans-serif}:host #box{padding:5px;height:auto;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid #000;background:#fff;width:300px;max-height:300px;min-height:100px;z-index:999}:host #box,:host #mask{display:none;position:absolute}:host #mask{top:0;left:0;background-color:rgba(0,0,0,.5);opacity:0;width:100vw;height:100vh;z-index:998;transition:opacity .4s ease-out}";
 
 class DialogBox extends HTMLElement {
     constructor(opts) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v;
         super();
         this._confirmBtnClickEvent = new Event("confirmed");
         this._cancelBtnClickEvent = new Event("cancelled");
@@ -32,8 +32,12 @@ class DialogBox extends HTMLElement {
             <div id="box">
 
                 <div id="dialog-content-wrapper">
-                    <slot name="dialog-title"></slot>
-                    <slot name="dialog-content"></slot>
+                    ${this.querySelector("[slot='dialog-title']") === null
+            ? `<div id="dialog-title">${(_u = opts) === null || _u === void 0 ? void 0 : _u.title}</div>` || ``
+            : `<slot name="dialog-title"></slot>`}
+                    ${this.querySelector("[slot='dialog-content']") === null
+            ? `<div id="dialog-content">${(_v = opts) === null || _v === void 0 ? void 0 : _v.content}</div>` || ``
+            : `<slot name="dialog-content"></slot>`}
                 </div>
 
                 ${this.querySelector("[slot='dialog-control']") === null
@@ -62,7 +66,7 @@ class DialogBox extends HTMLElement {
         }
     }
     set open(newState) {
-        newState ? this.setAttribute("open", JSON.stringify(newState)) : this.removeAttribute("open");
+        this.setAttribute("open", JSON.stringify(newState));
     }
     get open() {
         return this.hasAttribute("open");

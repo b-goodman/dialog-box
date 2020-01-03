@@ -38,12 +38,12 @@ $t-duration: 0.4s;
     background: $button-color-secondary;
 }
 
-slot[name="dialog-title"]{
+slot[name="dialog-title"], div#dialog-title{
     font-weight: 600;
     font-size: $content-font-size + 2;
 }
 
-slot[name="dialog-content"]::slotted(div){
+slot[name="dialog-content"]::slotted(div), div#dialog-content{
     padding: 10px;
 }
 
@@ -56,7 +56,7 @@ slot[name="dialog-content"]::slotted(div){
 
 
 
-:host([open]){
+:host([open="true"]){
     #box{
         display: unset;
     }
