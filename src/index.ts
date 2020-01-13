@@ -176,5 +176,6 @@ export default class DialogBox extends HTMLElement {
 
 }
 
-window.customElements.define("dialog-box", DialogBox);
+if (!window.customElements.get("dialog-box")) { window.customElements.define("dialog-box", DialogBox); }
+
 

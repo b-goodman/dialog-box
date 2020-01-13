@@ -1,6 +1,6 @@
 {
   "name": "@bgoodman/dialog-box",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Popup dialog for displaying information.",
   "main": "./dist/index.js",
   "scripts": {

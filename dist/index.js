@@ -124,6 +124,8 @@ class DialogBox extends HTMLElement {
         this._contentRef.innerHTML = newContent;
     }
 }
-window.customElements.define("dialog-box", DialogBox);
+if (!window.customElements.get("dialog-box")) {
+    window.customElements.define("dialog-box", DialogBox);
+}
 
 export default DialogBox;
